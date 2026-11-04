@@ -1,0 +1,526 @@
+/* ==========================================================================
+   🎓 POKÉMON CSS ANIMATIONS LAB - GUIDED STUDENT WORKBOOK
+   ==========================================================================
+   Student Name: _______________________
+   Date:         _______________________
+   
+   WELCOME TRAINER!
+   In this lab, YOU will write the CSS animations to bring this Pokémon battle
+   to life. The HTML and JavaScript are already wired up to add CSS classes
+   (like .animate-tackle, .animate-damage, etc.) when you click buttons.
+   
+   YOUR JOB:
+   Follow the guided steps (STEP 1, STEP 2...) in each exercise below.
+   Fill in the missing CSS properties where you see:
+  
+   
+   PRO TIP:
+   Click the "🧪 Animation Lab" button in the top-right corner of the screen
+   at any time to test your animations instantly!
+   
+   ==========================================================================
+   INDEX OF EXERCISES:
+     Level 1: Idle Breathing Loop       (@keyframes idle-player)
+     Level 2: Pokéball Entrance Slide   (@keyframes entrance-player)
+     Level 3: Physical Attack (Tackle)  (@keyframes tackle-player)
+     Level 4: Special Attack Charge Up  (@keyframes special-charge-player)
+     Level 5: Taking Damage (Hurt)      (@keyframes damage-hit)
+     Level 6: Faint / Knockout Fall     (@keyframes faint-collapse)
+     Level 7: Victory Celebration Jump  (@keyframes victory-jump)
+     Level 8: Screen Shake Shockwave    (@keyframes screen-shake)
+     Level 9: Projectile & Blast VFX    (@keyframes projectile-travel)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   🎯 LEVEL 1: IDLE BREATHING / FLOATING ANIMATION
+   --------------------------------------------------------------------------
+   Goal: Make the Pokémon look alive by gently breathing/hovering up and down.
+   
+   📖 Concepts you will practice:
+     - @keyframes definition
+     - transform: translateY() and scale()
+     - animation shorthand: name, duration, timing-function, iteration-count, direction
+   
+   👉 GUIDED INSTRUCTIONS:
+     1. In @keyframes idle-player:
+        - At 0%: Start at translateY(0px) and scale(1, 1)
+        - At 100%: Move UP by -10px using translateY(-10px) and stretch with scale(0.98, 1.02)
+     2. In .player-sprite-wrapper.animate-idle:
+        - Set animation name to 'idle-player'
+        - Duration: 2s (or 1.8s)
+        - Timing function: ease-in-out (smooth natural breathing)
+        - Iteration count: infinite (keep looping forever)
+        - Direction: alternate (go up, then back down smoothly)
+   ========================================================================== */
+
+/* STEP 1: Define the Idle Keyframes for Player */
+@keyframes idle-player {
+  0% {
+    /* 👉 YOUR CODE HERE: Reset position (translateY: 0px, scale: 1, 1) */
+    transform: translateY(0px) scale(1, 1);
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Move up by -10px and slightly stretch vertically */
+    /* Hint: transform: translateY(-10px) scale(0.98, 1.02); */
+    
+  }
+}
+
+/* STEP 2: Define Idle Keyframes for Enemy (slightly different so they don't sync) */
+@keyframes idle-enemy {
+  0% {
+    transform: translateY(0px) scale(1, 1);
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Move enemy up by -7px */
+    
+  }
+}
+
+/* STEP 3: Apply the animations to the sprite wrappers */
+.player-sprite-wrapper.animate-idle {
+  /* 👉 YOUR CODE HERE: Write the animation property */
+  /* Syntax: animation: [name] [duration] [timing-function] [iteration-count] [direction]; */
+  /* Example: animation: idle-player 2s ease-in-out infinite alternate; */
+  
+}
+
+.enemy-sprite-wrapper.animate-idle {
+  /* 👉 YOUR CODE HERE: Apply 'idle-enemy' with a 2.3s duration */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 2: BATTLE ENTRANCE ANIMATION (POKÉBALL SLIDE / POP-IN)
+   --------------------------------------------------------------------------
+   Goal: When a Pokémon enters the battlefield, make it slide in from off-screen
+   or pop out of a Pokéball with a burst of brightness!
+   
+   📖 Concepts you will practice:
+     - transform: translateX() and scale()
+     - opacity (0 = invisible, 1 = fully visible)
+     - filter: brightness() for the bright white Pokéball flash
+     - animation-fill-mode: forwards (keeps final frame in place)
+   
+   👉 GUIDED INSTRUCTIONS:
+     1. In @keyframes entrance-player:
+        - At 0%: Start off-screen left (translateX(-120px)), scale(0.3), opacity: 0, brightness(3)
+        - At 70%: Overshoot slightly (translateX(10px)), scale(1.08), opacity: 1
+        - At 100%: Rest at natural state (translateX(0px)), scale(1), brightness(1)
+     2. In .player-sprite-wrapper.animate-entrance:
+        - Use duration 0.8s and 'forwards' so it doesn't snap back!
+   ========================================================================== */
+
+/* STEP 1: Define Player Entrance Keyframes */
+@keyframes entrance-player {
+  0% {
+    /* 👉 YOUR CODE HERE: Start invisible, off-screen to the left (-120px), tiny scale(0.3), and bright(3) */
+    opacity: 0;
+    transform: translateX(-120px) scale(0.3);
+    filter: brightness(3);
+  }
+  70% {
+    /* 👉 YOUR CODE HERE: Pop in with slight overshoot (translateX(10px), scale(1.08), opacity: 1) */
+    
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Settle at normal position (translateX(0), scale(1), brightness(1)) */
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* STEP 2: Define Enemy Entrance Keyframes (sliding from the right: +120px) */
+@keyframes entrance-enemy {
+  0% {
+    /* 👉 YOUR CODE HERE: Start from right (+120px) */
+    opacity: 0;
+    transform: translateX(120px) scale(0.3);
+    filter: brightness(3);
+  }
+  70% {
+    /* 👉 YOUR CODE HERE: Overshoot to the left (-10px) */
+    
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Settle */
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* STEP 3: Apply entrance animation to the elements */
+.player-sprite-wrapper.animate-entrance {
+  /* 👉 YOUR CODE HERE: Apply entrance-player, duration 0.8s, ease-out, forwards */
+  /* Hint: animation: entrance-player 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; */
+  
+}
+
+.enemy-sprite-wrapper.animate-entrance {
+  /* 👉 YOUR CODE HERE: Apply entrance-enemy */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 3: PHYSICAL ATTACK (TACKLE / DASH)
+   --------------------------------------------------------------------------
+   Goal: A high-impact physical lunge!
+   Notice the 3 phases of good game animation:
+     Phase A (0% -> 25%): Wind-up / Anticipation (pull BACKWARDS slightly)
+     Phase B (25% -> 50%): Dash / Impact (lunge FORWARD diagonally toward opponent)
+     Phase C (50% -> 100%): Recoil & Return to base
+   
+   📖 Concepts you will practice:
+     - Multi-stage keyframe percentages (0%, 25%, 50%, 75%, 100%)
+     - Combining translate() and rotate()
+   
+   👉 GUIDED INSTRUCTIONS:
+     Player platform is in the bottom-left; Enemy platform is in top-right!
+     To lunge towards enemy: move positive X (right) and negative Y (up)!
+   ========================================================================== */
+
+/* STEP 1: Player Tackle Keyframes */
+@keyframes tackle-player {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    /* 👉 YOUR CODE HERE: Wind up backwards! Pull back left (-25px) and down (+8px), tilt back (-6deg) */
+    transform: translate(-25px, 8px) rotate(-6deg);
+  }
+  50% {
+    /* 👉 YOUR CODE HERE: Lunge forward toward enemy! translate(90px, -40px) and rotate(10deg) */
+    
+  }
+  70% {
+    /* 👉 YOUR CODE HERE: Impact recoil - pull back slightly */
+    transform: translate(40px, -15px) rotate(4deg);
+  }
+  100% {
+    /* Return to home position */
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* STEP 2: Enemy Tackle Keyframes (lunges towards bottom-left: -X, +Y) */
+@keyframes tackle-enemy {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    /* Wind up backwards to the right */
+    transform: translate(25px, -8px) rotate(6deg);
+  }
+  50% {
+    /* 👉 YOUR CODE HERE: Enemy lunges diagonally forward: translate(-90px, 40px) rotate(-10deg) */
+    
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* STEP 3: Apply tackle animations */
+.player-sprite-wrapper.animate-tackle {
+  /* 👉 YOUR CODE HERE: animation: tackle-player 0.65s cubic-bezier(0.25, 1, 0.5, 1); */
+  
+}
+
+.enemy-sprite-wrapper.animate-tackle {
+  /* 👉 YOUR CODE HERE: animation: tackle-enemy 0.65s cubic-bezier(0.25, 1, 0.5, 1); */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 4: SPECIAL ATTACK CHARGE-UP
+   --------------------------------------------------------------------------
+   Goal: The Pokémon charges mystical energy before launching a projectile!
+   Make the Pokémon vibrate and pulse with a glowing aura.
+   
+   📖 Concepts you will practice:
+     - filter: drop-shadow(0 0 [blur] [color])
+     - filter: brightness()
+     - rapid scale tremors
+   
+   👉 GUIDED INSTRUCTIONS:
+     Add a drop-shadow glow (e.g. gold rgba(255, 204, 0, 0.9) or cyan)
+     and scale up at 50% to show gathered power!
+   ========================================================================== */
+
+@keyframes special-charge-player {
+  0% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 0px transparent);
+  }
+  25% {
+    /* Slight crouch and initial glow */
+    transform: scale(0.94) translate(-2px, 2px);
+    filter: brightness(1.2) drop-shadow(0 0 10px #00d2ff);
+  }
+  50% {
+    /* 👉 YOUR CODE HERE: Power surge! Scale up (1.1), high brightness (1.5), strong drop-shadow glow */
+    /* Hint: transform: scale(1.1) translate(2px, -2px); filter: brightness(1.5) drop-shadow(0 0 20px #ffcc00); */
+    
+  }
+  75% {
+    transform: scale(0.97) translate(-1px, 1px);
+    filter: brightness(1.3) drop-shadow(0 0 15px #ff5722);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 0px transparent);
+  }
+}
+
+/* Enemy Charge Keyframes */
+@keyframes special-charge-enemy {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% {
+    /* 👉 YOUR CODE HERE: Enemy charges with purple aura drop-shadow(0 0 18px #8a2be2) */
+    
+  }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Apply charge animation */
+.player-sprite-wrapper.animate-special {
+  /* 👉 YOUR CODE HERE: animation: special-charge-player 0.8s ease-in-out; */
+  
+}
+
+.enemy-sprite-wrapper.animate-special {
+  /* 👉 YOUR CODE HERE: Apply special-charge-enemy */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 5: TAKING DAMAGE / HURT FLICKER & RECOIL
+   --------------------------------------------------------------------------
+   Goal: When struck by an attack, the Pokémon should flicker rapidly,
+   turn reddish-crimson, and shake backwards from the impact!
+   
+   📖 Concepts you will practice:
+     - Rapid opacity alternation (0.2 -> 1 -> 0.3 -> 1)
+     - filter: sepia(1) saturate(5) hue-rotate(-50deg) (creates a red hit-flash!)
+     - transform: translateX() knockback
+   ========================================================================== */
+
+@keyframes damage-hit {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+    filter: none;
+  }
+  15% {
+    /* Knocked back and flashed red */
+    transform: translate(-12px, 3px) rotate(-5deg);
+    opacity: 0.3;
+    filter: sepia(1) saturate(5) hue-rotate(-50deg);
+  }
+  30% {
+    /* 👉 YOUR CODE HERE: Rebound opposite direction (+12px, -3px) and high opacity (0.9) */
+    
+  }
+  45% {
+    /* Second flicker */
+    transform: translate(-6px, 1px);
+    opacity: 0.2;
+    filter: none;
+  }
+  60% {
+    /* 👉 YOUR CODE HERE: Recovering (transform: translate(4px, 0), opacity: 1) */
+    
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.pokemon-sprite-wrapper.animate-damage {
+  /* 👉 YOUR CODE HERE: animation: damage-hit 0.6s ease-in-out; */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 6: FAINT / KNOCKOUT (KO)
+   --------------------------------------------------------------------------
+   Goal: When HP reaches 0, the defeated Pokémon wobbles dizzily and sinks
+   downward through the platform into defeat.
+   
+   ⚠️ CRITICAL CONCEPT: animation-fill-mode: forwards
+   Without 'forwards', the Pokémon will pop right back up after fainting!
+   ========================================================================== */
+
+@keyframes faint-collapse {
+  0% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    /* Dizzy tilt left */
+    transform: translateY(-5px) rotate(-10deg);
+    opacity: 0.9;
+  }
+  50% {
+    /* Dizzy tilt right and begin sinking */
+    transform: translateY(15px) rotate(15deg);
+    opacity: 0.7;
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Sink completely down through platform and fade out */
+    /* Hint: transform: translateY(120px) scale(0.6) rotate(-20deg); opacity: 0; */
+    
+  }
+}
+
+.pokemon-sprite-wrapper.animate-faint {
+  /* 👉 YOUR CODE HERE: Write the animation property with 'forwards' */
+  /* Hint: animation: faint-collapse 1s ease-in-out forwards; */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 7: VICTORY CELEBRATION JUMP
+   --------------------------------------------------------------------------
+   Goal: When the player wins, make their Pokémon jump for joy!
+   
+   📖 Classic Disney Animation Principle: SQUASH & STRETCH
+     - When touching the ground (0%): Squash flat (scaleX > 1, scaleY < 1)
+     - At peak of jump (100%): Stretch tall (scaleX < 1, scaleY > 1)
+   ========================================================================== */
+
+@keyframes victory-jump {
+  0% {
+    /* Landing squash */
+    transform: translateY(0px) scale(1.15, 0.85);
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Jump UP by -30px and stretch tall */
+    /* Hint: transform: translateY(-30px) scale(0.88, 1.12); */
+    
+  }
+}
+
+.pokemon-sprite-wrapper.animate-victory {
+  /* 👉 YOUR CODE HERE: Loop jump with 'infinite alternate' so it continuously bounces! */
+  /* Hint: animation: victory-jump 0.45s ease-out infinite alternate; */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 8: ARENA SCREEN SHAKE
+   --------------------------------------------------------------------------
+   Goal: Heavy physical and special attacks should shake the whole battle stage!
+   The class .arena-shake is added to #battle-stage when hits land.
+   ========================================================================== */
+
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-5px, 3px); }
+  30% { transform: translate(6px, -4px); }
+  50% { transform: translate(-6px, 4px); }
+  70% { transform: translate(4px, -2px); }
+  85% { transform: translate(-2px, 2px); }
+}
+
+.battle-stage.arena-shake {
+  /* 👉 YOUR CODE HERE: animation: screen-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; */
+  
+}
+
+
+/* ==========================================================================
+   🎯 LEVEL 9: SPECIAL ATTACK VFX (PROJECTILE & IMPACT SHOCKWAVE)
+   --------------------------------------------------------------------------
+   Goal: Fly an energy blast from player to enemy, then explode!
+   ========================================================================== */
+
+@keyframes projectile-travel {
+  0% {
+    top: 65%;
+    left: 30%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2) rotate(90deg);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(270deg);
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Reach the enemy platform (top: 32%, left: 72%) and fade */
+    /* Hint: top: 32%; left: 72%; opacity: 0; transform: translate(-50%, -50%) scale(1.8) rotate(360deg); */
+    
+  }
+}
+
+@keyframes burst-shockwave {
+  0% {
+    top: 32%;
+    left: 72%;
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    /* 👉 YOUR CODE HERE: Expand outwards (scale(2.4)) and fade out (opacity: 0) */
+    
+  }
+}
+
+.special-projectile.projectile-shoot {
+  /* 👉 YOUR CODE HERE: animation: projectile-travel 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards; */
+  
+}
+
+.impact-burst.impact-explode {
+  /* 👉 YOUR CODE HERE: animation: burst-shockwave 0.5s ease-out forwards; */
+  
+}
+
+
+/* ==========================================================================
+   🌟 BONUS: HEAL GLOW & CRITICAL HIT FLASH
+   (Provided as reference to inspire your own custom moves!)
+   ========================================================================== */
+
+.pokemon-sprite-wrapper.animate-heal {
+  animation: heal-sparkle 0.85s ease-in-out;
+}
+
+@keyframes heal-sparkle {
+  0%   { filter: brightness(1) drop-shadow(0 0 0 #48bb78); }
+  50%  { transform: translateY(-8px) scale(1.05); filter: brightness(1.6) drop-shadow(0 0 25px #48bb78); }
+  100% { filter: brightness(1) drop-shadow(0 0 0 #48bb78); }
+}
+
+.battle-stage.crit-flash::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  pointer-events: none;
+  animation: white-flash 0.3s ease-out forwards;
+}
+
+@keyframes white-flash {
+  0%   { opacity: 0.8; }
+  100% { opacity: 0; }
+}

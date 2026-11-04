@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Battle Simulator - CSS Animation Lab</title>
+
+  <!-- Google Fonts for Retro Pixel Art Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Layout and UI Styling -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 
+    ======================================================================
+    STUDENT CSS ANIMATIONS WORKBOOK:
+    This stylesheet contains all keyframes and animation classes.
+    Open animations.css to complete the exercises and customize animations!
+    ======================================================================
+  -->
+  <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Bar: Matchup Selector & Lab Controls -->
+    <header class="top-bar">
+      <div class="logo-group">
+        <span class="pokeball-icon"></span>
+        <h1>POKÉ-ANIMATE <span class="badge">CSS LAB</span></h1>
+      </div>
+
+      <div class="matchup-controls">
+        <label for="player-input">Player:</label>
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="player-input" 
+            list="pokemon-suggestions" 
+            placeholder="Name or #ID..." 
+            value="pikachu"
+            autocomplete="off"
+            title="Type any Pokémon name (e.g. pikachu, lucario) or Pokédex number (#1-1025)"
+          />
+        </div>
+
+        <span class="vs-text">VS</span>
+
+        <label for="enemy-input">Enemy:</label>
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="enemy-input" 
+            list="pokemon-suggestions" 
+            placeholder="Name or #ID..." 
+            value="charizard"
+            autocomplete="off"
+            title="Type any Pokémon name or Pokédex number (#1-1025)"
+          />
+        </div>
+
+        <!-- Datalist providing search suggestions as the student types -->
+        <datalist id="pokemon-suggestions">
+          <!-- Gen 1 -->
+          <option value="pikachu">Pikachu (#25)</option>
+          <option value="charizard">Charizard (#6)</option>
+          <option value="blastoise">Blastoise (#9)</option>
+          <option value="venusaur">Venusaur (#3)</option>
+          <option value="gengar">Gengar (#94)</option>
+          <option value="mewtwo">Mewtwo (#150)</option>
+          <option value="mew">Mew (#151)</option>
+          <option value="eevee">Eevee (#133)</option>
+          <option value="snorlax">Snorlax (#143)</option>
+          <option value="gyarados">Gyarados (#130)</option>
+          <option value="dragonite">Dragonite (#149)</option>
+          <option value="alakazam">Alakazam (#65)</option>
+          <option value="machamp">Machamp (#68)</option>
+          <option value="lapras">Lapras (#131)</option>
+          <option value="arcanine">Arcanine (#59)</option>
+          <!-- Gen 2 -->
+          <option value="typhlosion">Typhlosion (#157)</option>
+          <option value="feraligatr">Feraligatr (#160)</option>
+          <option value="umbreon">Umbreon (#197)</option>
+          <option value="espeon">Espeon (#196)</option>
+          <option value="tyranitar">Tyranitar (#248)</option>
+          <option value="scizor">Scizor (#212)</option>
+          <option value="lugia">Lugia (#249)</option>
+          <option value="ho-oh">Ho-Oh (#250)</option>
+          <!-- Gen 3 -->
+          <option value="blaziken">Blaziken (#257)</option>
+          <option value="sceptile">Sceptile (#254)</option>
+          <option value="swampert">Swampert (#260)</option>
+          <option value="gardevoir">Gardevoir (#282)</option>
+          <option value="rayquaza">Rayquaza (#384)</option>
+          <option value="kyogre">Kyogre (#382)</option>
+          <option value="groudon">Groudon (#383)</option>
+          <option value="salamence">Salamence (#373)</option>
+          <option value="metagross">Metagross (#376)</option>
+          <!-- Gen 4 -->
+          <option value="lucario">Lucario (#448)</option>
+          <option value="garchomp">Garchomp (#445)</option>
+          <option value="infernape">Infernape (#392)</option>
+          <option value="dialga">Dialga (#483)</option>
+          <option value="palkia">Palkia (#484)</option>
+          <option value="giratina">Giratina (#487)</option>
+          <!-- Gen 5 -->
+          <option value="zoroark">Zoroark (#571)</option>
+          <option value="hydreigon">Hydreigon (#635)</option>
+          <option value="reshiram">Reshiram (#643)</option>
+          <option value="zekrom">Zekrom (#644)</option>
+          <!-- Gen 6 -->
+          <option value="greninja">Greninja (#658)</option>
+          <option value="sylveon">Sylveon (#700)</option>
+          <option value="aegislash">Aegislash (#681)</option>
+          <!-- Gen 7 -->
+          <option value="mimikyu">Mimikyu (#778)</option>
+          <option value="decidueye">Decidueye (#724)</option>
+          <option value="incineroar">Incineroar (#727)</option>
+          <!-- Gen 8 -->
+          <option value="cinderace">Cinderace (#815)</option>
+          <option value="dragapult">Dragapult (#887)</option>
+          <option value="zacian">Zacian (#888)</option>
+          <!-- Gen 9 -->
+          <option value="meowscarada">Meowscarada (#908)</option>
+          <option value="skeledirge">Skeledirge (#911)</option>
+          <option value="tinkaton">Tinkaton (#959)</option>
+          <option value="koraidon">Koraidon (#1007)</option>
+          <option value="miraidon">Miraidon (#1008)</option>
+        </datalist>
+
+        <button id="btn-load-matchup" class="btn btn-secondary" title="Search and load typed Pokémon">🔍 Search & Battle</button>
+        <button id="btn-random-matchup" class="btn btn-secondary" title="Choose two random Pokémon">🎲 Random</button>
+        <button id="btn-toggle-lab" class="btn btn-accent" title="Open CSS Animation Sandbox Drawer">🧪 Animation Lab</button>
+      </div>
+    </header>
+
+    <!-- Main Game Arena -->
+    <main class="battle-stage" id="battle-stage">
+      <!-- Background Elements -->
+      <div class="sky-backdrop"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+
+      <!-- Enemy Section (Top Right) -->
+      <div class="battle-side enemy-side" id="enemy-side">
+        <!-- Enemy HUD Card -->
+        <div class="status-card enemy-card" id="enemy-status-card">
+          <div class="card-header">
+            <span class="poke-name" id="enemy-name">Loading...</span>
+            <span class="poke-level" id="enemy-level">Lv. 50</span>
+          </div>
+          <div class="type-pill-container" id="enemy-types">
+            <span class="type-pill">???</span>
+          </div>
+          <div class="hp-section">
+            <span class="hp-label">HP</span>
+            <div class="hp-bar-track">
+              <div class="hp-bar-fill" id="enemy-hp-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="hp-text-container">
+            <span class="hp-numeric" id="enemy-hp-numeric">-- / --</span>
+          </div>
+        </div>
+
+        <!-- Enemy Platform & Sprite Container -->
+        <div class="platform-container enemy-platform-container">
+          <div class="platform-shadow"></div>
+          <div class="platform-base enemy-platform"></div>
+          
+          <!--
+            The Pokémon Sprite Wrapper.
+            CSS animation classes like .animate-idle, .animate-tackle, 
+            .animate-damage, and .animate-faint are applied directly to this element!
+          -->
+          <div class="pokemon-sprite-wrapper enemy-sprite-wrapper" id="enemy-sprite-wrapper">
+            <img id="enemy-sprite" class="pokemon-sprite" src="" alt="Enemy Pokémon" />
+            <!-- Visual effect overlay on hit -->
+            <div class="hit-effect-overlay" id="enemy-hit-fx"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Attack VFX Container (Projectiles & Blast FX) -->
+      <div class="vfx-stage" id="vfx-stage">
+        <div class="special-projectile" id="special-projectile"></div>
+        <div class="impact-burst" id="impact-burst"></div>
+      </div>
+
+      <!-- Player Section (Bottom Left) -->
+      <div class="battle-side player-side" id="player-side">
+        <!-- Player Platform & Sprite Container -->
+        <div class="platform-container player-platform-container">
+          <div class="platform-shadow"></div>
+          <div class="platform-base player-platform"></div>
+          
+          <!--
+            The Player Pokémon Sprite Wrapper.
+            Classes applied here: .animate-idle, .animate-tackle,
+            .animate-damage, .animate-faint, .animate-victory
+          -->
+          <div class="pokemon-sprite-wrapper player-sprite-wrapper" id="player-sprite-wrapper">
+            <img id="player-sprite" class="pokemon-sprite" src="" alt="Player Pokémon" />
+            <!-- Visual effect overlay on hit -->
+            <div class="hit-effect-overlay" id="player-hit-fx"></div>
+          </div>
+        </div>
+
+        <!-- Player HUD Card -->
+        <div class="status-card player-card" id="player-status-card">
+          <div class="card-header">
+            <span class="poke-name" id="player-name">Loading...</span>
+            <span class="poke-level" id="player-level">Lv. 50</span>
+          </div>
+          <div class="type-pill-container" id="player-types">
+            <span class="type-pill">???</span>
+          </div>
+          <div class="hp-section">
+            <span class="hp-label">HP</span>
+            <div class="hp-bar-track">
+              <div class="hp-bar-fill" id="player-hp-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="hp-text-container">
+            <span class="hp-numeric" id="player-hp-numeric">-- / --</span>
+          </div>
+          <!-- EXP Bar for Extra Animation Practice -->
+          <div class="exp-section">
+            <span class="exp-label">EXP</span>
+            <div class="exp-bar-track">
+              <div class="exp-bar-fill" id="player-exp-fill" style="width: 65%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Interface: Battle Dialogue & Action Panel -->
+    <footer class="battle-interface">
+      <!-- Dialogue Log -->
+      <div class="dialogue-box" id="dialogue-box">
+        <p id="dialogue-text">Welcome to the Pokémon Battle Lab! Select an action to test your CSS animations.</p>
+      </div>
+
+      <!-- Action / Move Selection Buttons -->
+      <div class="actions-panel" id="actions-panel">
+        <button class="move-btn move-physical" id="btn-move-physical" data-type="physical">
+          <span class="move-name" id="name-move-physical">Tackle</span>
+          <span class="move-meta">PHYSICAL (Tackle Anim)</span>
+        </button>
+
+        <button class="move-btn move-special" id="btn-move-special" data-type="special">
+          <span class="move-name" id="name-move-special">Special Blast</span>
+          <span class="move-meta">SPECIAL (VFX Anim)</span>
+        </button>
+
+        <button class="move-btn move-heal" id="btn-move-heal" data-type="heal">
+          <span class="move-name">Recover / Potion</span>
+          <span class="move-meta">HEAL (Glow Anim)</span>
+        </button>
+
+        <button class="move-btn move-reset" id="btn-reset-battle">
+          <span class="move-name">🔄 Restart Match</span>
+          <span class="move-meta">Reset HP & Status</span>
+        </button>
+      </div>
+    </footer>
+
+    <!-- 
+      ======================================================================
+      STUDENT ANIMATION LAB DRAWER (Testing Sandbox)
+      Allows students to trigger any animation on demand without having to
+      manually simulate a whole battle!
+      ======================================================================
+    -->
+    <aside class="lab-drawer" id="lab-drawer">
+      <div class="lab-header">
+        <h2>🧪 CSS Animation Playground</h2>
+        <button id="btn-close-lab" class="btn-close" aria-label="Close Animation Lab">&times;</button>
+      </div>
+
+      <div class="lab-content">
+        <p class="lab-intro">
+          Test individual CSS animations defined in <code>animations.css</code>. Click any trigger below to inspect your keyframe transitions in real-time!
+        </p>
+
+        <!-- Interactive Task Guide & Hint Card -->
+        <div class="active-guide-card" id="active-guide-card">
+          <div class="guide-badge" id="guide-badge">LEVEL GUIDE & HINTS</div>
+          <h4 id="guide-title">Select an animation below</h4>
+          <p id="guide-desc">Click any button below to see the guided coding task and syntax hints for <code>animations.css</code>.</p>
+          <pre class="guide-snippet"><code id="guide-code">/* Your CSS instructions will appear here */</code></pre>
+        </div>
+
+        <!-- Player Animation Triggers -->
+        <div class="lab-group">
+          <h3>🎮 Player Animations</h3>
+          <div class="lab-btn-grid">
+            <button class="lab-btn" data-target="player" data-anim="animate-idle">
+              <span>Idle Loop</span>
+              <code>.animate-idle</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-entrance">
+              <span>Entrance</span>
+              <code>.animate-entrance</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-tackle">
+              <span>Tackle Dash</span>
+              <code>.animate-tackle</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-special">
+              <span>Special Attack</span>
+              <code>.animate-special</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-damage">
+              <span>Take Damage</span>
+              <code>.animate-damage</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-faint">
+              <span>Faint / KO</span>
+              <code>.animate-faint</code>
+            </button>
+            <button class="lab-btn" data-target="player" data-anim="animate-victory">
+              <span>Victory Bounce</span>
+              <code>.animate-victory</code>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enemy Animation Triggers -->
+        <div class="lab-group">
+          <h3>👾 Enemy Animations</h3>
+          <div class="lab-btn-grid">
+            <button class="lab-btn" data-target="enemy" data-anim="animate-idle">
+              <span>Enemy Idle</span>
+              <code>.animate-idle</code>
+            </button>
+            <button class="lab-btn" data-target="enemy" data-anim="animate-entrance">
+              <span>Enemy Entrance</span>
+              <code>.animate-entrance</code>
+            </button>
+            <button class="lab-btn" data-target="enemy" data-anim="animate-tackle">
+              <span>Enemy Tackle</span>
+              <code>.animate-tackle</code>
+            </button>
+            <button class="lab-btn" data-target="enemy" data-anim="animate-damage">
+              <span>Enemy Damage</span>
+              <code>.animate-damage</code>
+            </button>
+            <button class="lab-btn" data-target="enemy" data-anim="animate-faint">
+              <span>Enemy Faint</span>
+              <code>.animate-faint</code>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stage & FX Triggers -->
+        <div class="lab-group">
+          <h3>💥 Stage & VFX Animations</h3>
+          <div class="lab-btn-grid">
+            <button class="lab-btn" data-target="stage" data-anim="arena-shake">
+              <span>Screen Shake</span>
+              <code>.arena-shake</code>
+            </button>
+            <button class="lab-btn" data-target="stage" data-anim="crit-flash">
+              <span>Flash White</span>
+              <code>.crit-flash</code>
+            </button>
+            <button class="lab-btn" data-target="vfx" data-anim="projectile-shoot">
+              <span>Fire Projectile</span>
+              <code>.projectile-shoot</code>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Exercise Reference Table -->
+        <div class="lab-tasks-summary">
+          <h3>📋 Student Task Checklist</h3>
+          <ul>
+            <li><strong>Task 1:</strong> Idle breathing hover (<code>@keyframes idle-player</code>)</li>
+            <li><strong>Task 2:</strong> Pokéball entrance slide-in (<code>@keyframes entrance-player</code>)</li>
+            <li><strong>Task 3:</strong> Physical attack lunge (<code>@keyframes tackle-player</code>)</li>
+            <li><strong>Task 4:</strong> Elemental special pulse (<code>@keyframes special-charge</code>)</li>
+            <li><strong>Task 5:</strong> Hurt flicker & red flash (<code>@keyframes damage-flash</code>)</li>
+            <li><strong>Task 6:</strong> Defeat collapse into ground (<code>@keyframes faint-drop</code>)</li>
+            <li><strong>Task 7:</strong> Screen shake shockwave (<code>@keyframes arena-shake</code>)</li>
+            <li><strong>Task 8:</strong> Victory celebration jump (<code>@keyframes victory-jump</code>)</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay backdrop for drawer -->
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  </div>
+
+  <!-- JavaScript to connect PokeAPI & Handle Animation Triggering -->
+  <script src="app.js"></script>
+</body>
+</html>
